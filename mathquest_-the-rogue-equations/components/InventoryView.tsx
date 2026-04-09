@@ -112,12 +112,22 @@ const InventoryView: React.FC<InventoryViewProps> = ({ player, onEquip, onUse, o
                             const borderColor = rarityColor.split(' ')[0];
                             const textColor = rarityColor.split(' ')[1];
                             
+                            let typeLabel = '';
+                            if (item.type === ItemType.WEAPON) typeLabel = 'WEAPON';
+                            else if (item.type === ItemType.ARMOR) typeLabel = 'ARMOR';
+                            else if (item.type === ItemType.POTION_HEAL) typeLabel = 'CONSUMABLE';
+                            else if (item.type === ItemType.BOMB) typeLabel = 'BOMB (CONSUMABLE)';
+                            else typeLabel = 'MAGIC SCROLL';
+                            
                             return (
                             <div key={`${item.id}-${idx}`} className={`border p-3 hover:bg-gray-900 transition-colors flex justify-between items-center group ${borderColor}`}>
                                 <div className="flex items-center gap-3">
                                     <div className="text-3xl">{item.icon}</div>
                                     <div>
-                                        <div className={`text-xl group-hover:text-yellow-400 ${textColor}`}>{item.name}</div>
+                                        <div className="flex items-center gap-2">
+                                            <div className={`text-xl group-hover:text-yellow-400 ${textColor}`}>{item.name}</div>
+                                            <span className="text-[10px] px-1 border border-gray-600 text-gray-400 bg-gray-800 rounded">{typeLabel}</span>
+                                        </div>
                                         <div className="text-xs text-gray-400">{item.description}</div>
                                     </div>
                                 </div>
@@ -138,6 +148,11 @@ const InventoryView: React.FC<InventoryViewProps> = ({ player, onEquip, onUse, o
                                         >
                                             USE
                                         </button>
+                                    )}
+                                    {(item.type === ItemType.BOMB || item.type === ItemType.SCROLL_SKIP) && (
+                                        <span className="text-[10px] text-gray-500 border border-gray-700 px-2 py-1 text-center bg-gray-900">
+                                            BATTLE ONLY
+                                        </span>
                                     )}
                                 </div>
                             </div>
