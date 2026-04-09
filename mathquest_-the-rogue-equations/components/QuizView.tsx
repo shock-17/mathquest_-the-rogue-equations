@@ -352,28 +352,28 @@ const QuizView: React.FC<QuizViewProps> = ({
        </div>
 
        {/* Dialogue / Action Box */}
-       <div className="h-48 w-full max-w-4xl mx-auto undertale-box p-4 md:p-6 text-xl md:text-2xl relative mb-4 z-10">
+       <div className="min-h-[12rem] md:min-h-[16rem] w-full max-w-4xl mx-auto undertale-box p-4 md:p-6 text-xl md:text-2xl relative mb-4 z-10 flex flex-col">
            {phase === 'MENU' && (
                <div className="typewriter">{dialogue}</div>
            )}
 
            {phase === 'QUESTION' && question && (
-               <div className="w-full h-full flex flex-col">
+               <div className="w-full flex-1 flex flex-col">
                    <div className="flex justify-between items-start mb-4">
-                       <div className="text-xl md:text-3xl font-bold max-w-[80%]">{question.question}</div>
-                       <div className={`flex items-center gap-2 text-2xl ${timer <= 5 ? 'text-red-500 animate-pulse' : 'text-yellow-400'}`}>
-                           <Clock size={24} /> {timer}s
+                       <div className="text-lg md:text-3xl font-bold max-w-[80%]">{question.question}</div>
+                       <div className={`flex items-center gap-2 text-xl md:text-2xl ${timer <= 5 ? 'text-red-500 animate-pulse' : 'text-yellow-400'}`}>
+                           <Clock size={24} className="hidden md:block" /> {timer}s
                        </div>
                    </div>
-                   <div className="grid grid-cols-2 gap-4">
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4 mt-auto">
                        {question.options.map((opt, i) => (
                            <button 
                              key={i} 
                              onClick={() => handleAnswer(i)}
-                             className="text-left hover:text-yellow-400 flex items-center gap-2 transition-colors border border-transparent hover:border-white p-2"
+                             className="text-left hover:text-yellow-400 flex items-start gap-2 transition-colors border border-transparent hover:border-white p-2 text-base md:text-xl"
                            >
-                               <span className="text-red-500">*</span>
-                               {opt}
+                               <span className="text-red-500 mt-1">*</span>
+                               <span>{opt}</span>
                            </button>
                        ))}
                    </div>
@@ -383,16 +383,16 @@ const QuizView: React.FC<QuizViewProps> = ({
            {phase === 'ITEM_SELECT' && (
                <div className="flex flex-col h-full">
                    <h3 className="mb-2 border-b border-white">{ui.inventory}</h3>
-                   <div className="grid grid-cols-2 gap-2 overflow-y-auto flex-1">
+                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2 overflow-y-auto flex-1 max-h-48">
                        {inventory.length === 0 && <div className="p-2 text-gray-500">{ui.empty}</div>}
                        {inventory.map((item, i) => (
-                           <button key={i} onClick={() => handleItemUse(item)} className="text-left hover:text-yellow-400 p-1 flex justify-between">
-                               <span>* {item.name}</span>
-                               <span className="text-xs text-gray-400 self-center">{item.description}</span>
+                           <button key={i} onClick={() => handleItemUse(item)} className="text-left hover:text-yellow-400 p-2 flex justify-between items-center border border-transparent hover:border-gray-700">
+                               <span className="text-base md:text-xl">* {item.name}</span>
+                               <span className="text-xs text-gray-400 ml-2">{item.description}</span>
                            </button>
                        ))}
                    </div>
-                   <button onClick={() => setPhase('MENU')} className="mt-2 text-gray-400 text-sm hover:text-white text-left">* {ui.back}</button>
+                   <button onClick={() => setPhase('MENU')} className="mt-4 text-gray-400 text-sm hover:text-white text-left">* {ui.back}</button>
                </div>
            )}
            
