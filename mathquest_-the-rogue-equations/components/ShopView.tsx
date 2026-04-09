@@ -104,11 +104,18 @@ const ShopView: React.FC<ShopViewProps> = ({ gold, onBuy, onLeave, layer }) => {
                     // Extract border color for hover effect
                     const borderColorClass = rarityColor.split(' ').find(c => c.startsWith('border-')) || 'border-white';
                     
+                    let typeLabel = '';
+                    if (item.type === ItemType.WEAPON) typeLabel = 'WEAPON';
+                    else if (item.type === ItemType.ARMOR) typeLabel = 'ARMOR';
+                    else if (item.type === ItemType.POTION_HEAL) typeLabel = 'CONSUMABLE';
+                    else if (item.type === ItemType.BOMB) typeLabel = 'BOMB (BATTLE ONLY)';
+                    else typeLabel = 'MAGIC SCROLL';
+                    
                     return (
                     <div key={item.id} className={`border p-4 flex flex-col items-center transition-colors group ${borderColorClass} hover:bg-gray-900`}>
                         <div className="text-6xl mb-4 group-hover:scale-110 transition-transform">{item.icon}</div>
-                        <div className={`text-xl font-bold ${rarityColor.split(' ').find(c => c.startsWith('text-'))}`}>{item.name}</div>
-                        <div className="text-xs uppercase mb-1 opacity-70">{item.rarity}</div>
+                        <div className={`text-xl font-bold text-center ${rarityColor.split(' ').find(c => c.startsWith('text-'))}`}>{item.name}</div>
+                        <div className="text-xs uppercase mb-1 opacity-70">{item.rarity} • {typeLabel}</div>
                         <div className="text-gray-400 text-sm mb-2 h-10 text-center">{item.description}</div>
                         <div className="text-yellow-400 text-2xl mb-4">{item.price} G</div>
                         <button 
