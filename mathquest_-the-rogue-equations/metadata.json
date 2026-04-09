@@ -1,0 +1,5 @@
+{
+  "name": "MathQuest: The Rogue Equations",
+  "description": "A rogue-like dungeon crawler where math is your weapon. Traverse a branching map, defeat enemies by solving procedurally generated math problems via Gemini, collect loot, and survive to the final boss.",
+  "requestFramePermissions": []
+}
