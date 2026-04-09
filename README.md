@@ -12,3 +12,10 @@ Cultural Trivia: Fight enemies to gain power-ups by answering questions about In
 Procedural Maps: No two runs are the same, explore different islands with unique biomes.
 
 Artifact System: Collect items to boost your stats.
+
+graph LR
+    A[Player Spawn] --> B{History Gate}
+    B -- Correct --> C[Legendary Relic]
+    B -- Wrong --> D[Elite Combat]
+    C --> E[Next Island]
+    D --> E
