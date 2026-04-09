@@ -21,20 +21,20 @@ const InventoryView: React.FC<InventoryViewProps> = ({ player, onEquip, onUse, o
   const [activeTab, setActiveTab] = useState<'ITEMS' | 'LORE'>('ITEMS');
 
   return (
-    <div className="flex flex-col h-full bg-black text-white font-pixel p-4 animate-in fade-in duration-300">
+    <div className="flex flex-col h-full bg-black text-white font-pixel p-4 animate-in fade-in duration-300 overflow-y-auto md:overflow-hidden">
         
         {/* Header */}
-        <div className="flex justify-between items-center mb-6 border-b-2 border-white pb-2">
+        <div className="flex justify-between items-center mb-6 border-b-2 border-white pb-2 shrink-0">
             <h2 className="text-4xl">INVENTORY</h2>
             <button onClick={onClose} className="flex items-center gap-2 hover:text-yellow-400">
                 <ArrowLeft /> BACK
             </button>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-8 h-full overflow-hidden">
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8 flex-1 md:overflow-hidden">
             
             {/* Left: Stats & Equipment */}
-            <div className="md:w-1/3 flex flex-col gap-6">
+            <div className="md:w-1/3 flex flex-col gap-6 shrink-0">
                 
                 {/* Stats Panel */}
                 <div className="undertale-box p-4">
@@ -84,7 +84,7 @@ const InventoryView: React.FC<InventoryViewProps> = ({ player, onEquip, onUse, o
             </div>
 
             {/* Right: Inventory / Lore Grid */}
-            <div className="flex-1 undertale-box p-4 flex flex-col overflow-hidden">
+            <div className="flex-1 undertale-box p-4 flex flex-col min-h-[500px] md:min-h-0 md:overflow-hidden">
                 <div className="flex gap-4 mb-4 border-b border-gray-700 pb-2">
                     <button 
                         onClick={() => setActiveTab('ITEMS')}
