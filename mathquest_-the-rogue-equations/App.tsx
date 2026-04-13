@@ -10,6 +10,7 @@ import { GameState, MapNode, NodeType, Player, Item, ItemType, Difficulty, RunMo
 import { MAP_LAYERS, INITIAL_PLAYER, HEAL_AMOUNT_REST, MODIFIER_METADATA, BASE_PLAYER_DAMAGE, UI_TEXT } from './constants';
 import { playSound } from './services/soundService';
 import { Heart, Settings, X, Globe, Trophy } from 'lucide-react';
+import { Analytics } from "@vercel/analytics/react"
 
 // Generates Map. Supports partial regeneration from a specific layer.
 const generateMap = (existingNodes: MapNode[] = [], startLayer: number = 0, modifiers: RunModifier[] = []): MapNode[] => {
