@@ -5,6 +5,7 @@ import { playSound } from '../services/soundService';
 import { Heart, Skull, Sparkles, Zap, Clock } from 'lucide-react';
 import Stickman from './Stickman';
 import { ENEMY_STATS, BASE_PLAYER_DAMAGE, UI_TEXT } from '../constants';
+import { ASSETS } from '../assets';
 
 interface QuizViewProps {
   nodeType: NodeType;
@@ -314,7 +315,12 @@ const QuizView: React.FC<QuizViewProps> = ({
              {/* Player Damage Flash Overlay */}
              {playerAction === 'damage' && <div className="absolute inset-0 bg-red-500 mix-blend-multiply opacity-50 rounded-full animate-pulse"></div>}
              
-             <Stickman action={playerAction} />
+             <img 
+                 src={ASSETS.hero} 
+                 alt="Player" 
+                 className={`w-24 h-24 md:w-32 md:h-32 object-contain transition-transform ${playerAction === 'attack' ? 'animate-player-attack' : ''}`}
+                 referrerPolicy="no-referrer"
+             />
              
              <div className="mt-4 flex gap-4 text-xl">
                  <div className="flex items-center gap-1 text-yellow-400">
@@ -340,7 +346,12 @@ const QuizView: React.FC<QuizViewProps> = ({
                   ${enemyAction === 'damage' ? 'animate-[shake_0.2s_infinite]' : ''}
                   ${enemyAction === 'attack' ? 'animate-lunge' : 'animate-bounce-slow'}
               `}>
-                {nodeType === NodeType.BOSS ? <Skull size={100} className="text-red-500 drop-shadow-glow"/> : <Skull size={64} />}
+                <img 
+                    src={nodeType === NodeType.BOSS ? ASSETS.boss : nodeType === NodeType.ELITE ? ASSETS.elite : ASSETS.enemy} 
+                    alt="Enemy" 
+                    className={`object-contain ${nodeType === NodeType.BOSS ? 'w-32 h-32 md:w-40 md:h-40 drop-shadow-glow' : 'w-24 h-24 md:w-32 md:h-32'}`}
+                    referrerPolicy="no-referrer"
+                />
               </div>
               <div className="mt-4 w-full flex flex-col items-center">
                   <div className="w-24 md:w-32 h-4 bg-gray-700 border border-white relative">
