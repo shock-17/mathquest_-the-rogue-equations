@@ -3,7 +3,6 @@ import { TriviaQuestion, NodeType, Item, ItemType, Difficulty, RunModifier, Lang
 import { generateQuestion } from '../services/geminiService';
 import { playSound } from '../services/soundService';
 import { Heart, Skull, Sparkles, Zap, Clock } from 'lucide-react';
-import Stickman from './Stickman';
 import { ENEMY_STATS, BASE_PLAYER_DAMAGE, UI_TEXT } from '../constants';
 import { ASSETS } from '../assets';
 
@@ -425,8 +424,8 @@ const QuizView: React.FC<QuizViewProps> = ({
                      if (phase !== 'MENU') return;
                      setSelectedIdx(i);
                      playSound.menuSelect();
-                     if (opt === 'FIGHT') loadQuestion();
-                     if (opt === 'ITEM') setPhase('ITEM_SELECT');
+                     if (i === 0) loadQuestion();
+                     if (i === 1) setPhase('ITEM_SELECT');
                  }}
                >
                   <div className="flex items-center gap-2">
