@@ -261,6 +261,8 @@ export const generateQuestion = async (
         Keep it concise.
         Return JSON.`;
         
+        console.log(`[Gemini] Requesting question with Lang: ${langPrompt}`);
+
         const response = await ai.models.generateContent({
           model: 'gemini-3-flash-preview',
           contents: "Generate one Indonesian trivia question.",
@@ -271,6 +273,7 @@ export const generateQuestion = async (
           }
         });
         const text = response.text;
+        console.log(`[Gemini] Raw Response:`, text);
         if (!text) throw new Error("No text");
         return JSON.parse(text) as TriviaQuestion;
     })();
